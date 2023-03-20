@@ -18,8 +18,8 @@ module Knight = struct
 end
 
 module Board = struct
-    (* Future: make the board nxn instead of 6x6 *)
-    let board = Array.make_matrix 32 32 false 
+    (* Future: make the board nxn instead of 100x100 *)
+    let board = Array.make_matrix 100 100 false 
 
     let get x y = board.(x).(y)
 
@@ -58,7 +58,7 @@ let show_path path =
 let knights_tour x y =
     Board.set x y true;
     let rec aux kn path length =
-        if length = 1024 then Some path else
+        if length = 10000 then Some path else
             let (nx, ny) = Board.pick_move kn in
             Board.set nx ny true;
             aux (Knight.Pos (nx, ny)) ((nx, ny) :: path) (length + 1)
