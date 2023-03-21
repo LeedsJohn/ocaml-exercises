@@ -1,0 +1,3 @@
+(executable
+   (name two_sum)
+   (libraries base stdio))
