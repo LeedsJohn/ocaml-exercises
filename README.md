@@ -1,4 +1,3 @@
-# ocaml-knights-tour
-Simple project to find a knight's tour written in OCaml for learning.
+# OCaml Exercises
 
-I first implemented a brute force solution and then read about Warnsdorff's rule and implemented that.
+This repository contains several programming exercises solved in OCaml to better my understanding of the language.
