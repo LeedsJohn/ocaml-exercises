@@ -20,8 +20,8 @@ let findSmallestInteger nums value =
         | true -> find_answer (i + 1)
     in
     find_answer 0
-
-
+(* -------------------------------------------------------------------------- *)
+let () = Stdio.print_endline "Testing:"
 
 let tests = [|
     (1, [|1; -10; 7; 13; 6; 8|], 5, 4);
