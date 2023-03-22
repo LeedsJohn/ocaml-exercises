@@ -21,7 +21,7 @@ let tests = [
 let _ =
     let rec aux i = function
         | [] -> ()
-        | ((nums, goal, ans) :: t) -> if (Bool.to_int (two_sum nums goal)) = (Bool.to_int ans) then aux (i + 1) t else
+        | ((nums, goal, ans) :: t) -> if Bool.equal (two_sum nums goal) ans then aux (i + 1) t else
             Stdio.print_endline ("Failed test " ^ (Int.to_string i));
             aux (i + 1) t
     in
