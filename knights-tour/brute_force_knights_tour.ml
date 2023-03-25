@@ -5,6 +5,7 @@ module Knight = struct
     let get_coords = function
         | Pos (x, y) -> (x, y)
 
+    (* all possible moves for the knight regardless of if they're legal *)
     let get_moves kn = 
         let offsets = [(2, 1); (2, -1); (-2, 1); (-2, -1); (1, 2); (-1, 2); (1, -2); (-1, -2)]
         in
@@ -19,12 +20,15 @@ end
 
 module Board = struct
     (* Future: make the board nxn instead of 6x6 *)
+    (* Represents which spaces have been visited *)
     let board = Array.make_matrix 6 6 false 
 
     let get x y = board.(x).(y)
 
     let set x y value = board.(x).(y) <- value
 
+    (* Filters out of bound moves *)
+    (* probably could use List.filter or something? *)
     let valid_moves kn =
         let moves = Knight.get_moves kn in
         let length = Array.length board in
