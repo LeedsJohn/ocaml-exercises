@@ -2,11 +2,11 @@ open Base
 
 let () = Stdio.print_endline ""
 
-let pieces_left board =
+let is_full board =
     let rec aux x y =
-        if y = 9 then 0 else
+        if y = 9 then true else
         if x = 9 then aux 0 (y + 1) else
-        if board.(y).(x) = 0 then 1 + aux (x + 1) y else aux (x + 1) y
+        if board.(y).(x) = 0 then false else aux (x + 1) y
     in
     aux 0 0
 
@@ -54,21 +54,20 @@ let show_board board =
 
 (* returns if the board is solved *)
 let solve board =
-    let count = pieces_left board in
-    let rec aux count =
-        if count = 0 then true else 
+    let rec aux () = (* is this a bandaid solution for having 0 arguments? *)
+        if is_full board then true else 
         let move = get_move board in
         let choices = valid_nums board move.x move.y in
         let rec try_moves = function
             | [] -> false
             | (h :: t) ->
                 board.(move.y).(move.x) <- h;
-                if aux (count - 1) then true else
+                if aux () then true else
                     let () = board.(move.y).(move.x) <- 0 in try_moves t
         in
         try_moves choices
     in
-    aux count
+    aux ()
 
 
 let puzzle = [|
