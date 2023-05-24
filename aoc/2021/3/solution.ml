@@ -96,6 +96,9 @@ let part1 nums =
     let res = Array.map res ~f:get_bit in
     (bin_to_dec res) * (bin_to_dec (invert res))
 
+let part2 nums =
+    let most_common ar =
+
 
 let () = Stdio.print_endline ("Part 1: " ^ (Int.to_string (part1 (numbers "input.txt"))))
 let () = Stdio.print_endline ("Part 2: " ^ (Int.to_string (part2 commands))) *)

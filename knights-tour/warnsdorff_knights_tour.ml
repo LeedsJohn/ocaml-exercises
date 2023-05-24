@@ -1,10 +1,11 @@
 module Knight = struct
     type knight = 
-        | Pos of int * int;;
+        | Pos of int * int
 
     let get_coords = function
         | Pos (x, y) -> (x, y)
 
+    (* all possible moves for the knight regardless of if they're legal *)
     let get_moves kn = 
         let offsets = [(2, 1); (2, -1); (-2, 1); (-2, -1); (1, 2); (-1, 2); (1, -2); (-1, -2)]
         in
@@ -19,12 +20,15 @@ end
 
 module Board = struct
     (* Future: make the board nxn instead of 100x100 *)
+    (* Represents which spaces have been visited *)
     let board = Array.make_matrix 100 100 false 
 
     let get x y = board.(x).(y)
 
     let set x y value = board.(x).(y) <- value
 
+    (* Filters out of bound moves *)
+    (* probably could use List.filter or something? *)
     let valid_moves kn =
         let moves = Knight.get_moves kn in
         let length = Array.length board in
@@ -36,6 +40,8 @@ module Board = struct
         in
         aux [] moves
     
+    (* warnsdorff implementation picks the next square with the fewest
+       possibilities after moving to that square *)
     let pick_move kn = 
         let moves = valid_moves kn in
         let rec aux res = function
